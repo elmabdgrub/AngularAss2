@@ -1,0 +1,88 @@
+<div class="container">
+    <h2>Add New Product</h2>
+  
+    <!-- Success Alert -->
+    <div *ngIf="showSuccessAlert" class="alert alert-success">
+      Product has been added successfully!
+    </div>
+  
+    <form (ngSubmit)="onSubmit()" #productForm="ngForm" novalidate>
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="product.title"
+          name="title"
+          class="form-control"
+          required
+          minlength="3"
+          #title="ngModel"
+        />
+        <div *ngIf="title.invalid && title.touched" class="text-danger">
+          <small *ngIf="title.errors?.['required']">Title is required.</small>
+          <small *ngIf="title.errors?.['minlength']">Title must be at least 3 characters long.</small>
+        </div>
+      </div>
+  
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          [(ngModel)]="product.description"
+          name="description"
+          class="form-control"
+          required
+          minlength="10"
+          #description="ngModel"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="text-danger">
+          <small *ngIf="description.errors?.['required']">Description is required.</small>
+          <small *ngIf="description.errors?.['minlength']">Description must be at least 10 characters long.</small>
+        </div>
+      </div>
+  
+      <!-- Price Field -->
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          id="price"
+          [(ngModel)]="product.price"
+          name="price"
+          class="form-control"
+          required
+          min="0.01"
+          #price="ngModel"
+        />
+        <div *ngIf="price.invalid && price.touched" class="text-danger">
+          <small *ngIf="price.errors?.['required']">Price is required.</small>
+          <small *ngIf="price.errors?.['min']">Price must be greater than 0.</small>
+        </div>
+      </div>
+  
+      <!-- Image URL Field -->
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input
+          type="text"
+          id="image"
+          [(ngModel)]="product.image"
+          name="image"
+          class="form-control"
+          required
+          pattern="https?://.+"
+          #image="ngModel"
+        />
+        <div *ngIf="image.invalid && image.touched" class="text-danger">
+          <small *ngIf="image.errors?.['required']">Image URL is required.</small>
+          <small *ngIf="image.errors?.['pattern']">Enter a valid URL.</small>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="productForm.invalid">Add Product</button>
+    </form>
+  </div>
+  

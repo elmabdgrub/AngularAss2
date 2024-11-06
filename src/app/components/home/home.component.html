@@ -1,0 +1,32 @@
+  <section class="trending-product section" style="margin-top: 12px;">
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12" *ngFor="let product of products">
+                <!-- Start Single Product -->
+                <div class="single-product">
+                    <div class="product-image">
+                        <img [src]="product.image" alt="{{ product.title }}" style="width: 280px; height: 300px; object-fit: cover; object-position: 100% 0;">
+                        <div class="button">
+                            <a [routerLink]="['/product', product.id]" class="btn btn-info" style="margin-bottom: 5px; ">View Details</a>
+                            <button class="btn " (click)="addToCart(product)"><i class="lni lni-cart"></i> Add to Cart</button>
+                            
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="category">{{ product.category }}</span>
+                        <h4 class="title">
+                            <a href="product-grids.html">{{ product.title }}</a>
+                        </h4>
+                        
+                        <div class="price">
+                            <span>${{ product.price }}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Product -->
+            </div>
+            
+        </div>
+    </div>
+</section>
