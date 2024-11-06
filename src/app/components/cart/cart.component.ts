@@ -12,13 +12,17 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
+  totalCost: number = 0;
+  totalItems: number = 0;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
-      console.log('Updated cart items in CartComponent:', this.cartItems); // Log to verify subscription
+      this.totalCost = this.cartService.getTotalCost();
+      this.totalItems = this.cartService.getTotalItemsCount();
+      console.log(this.cartItems);
     });
   }
 
